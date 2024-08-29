@@ -25,6 +25,10 @@ async def bye(ctx):
 async def password(ctx):
     await ctx.send(gen_pass(10))
 
+@bot.command()
+async def help(ctx):
+    await ctx.send(f"Comandos: $hello , $bye , $password (genera una contraseña), $cool , $joined @tu nombre (da la bienvenida)")
+
 @bot.group()
 async def cool(ctx):
     """Says if a user is cool.
