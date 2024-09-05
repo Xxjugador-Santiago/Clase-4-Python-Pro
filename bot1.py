@@ -5,6 +5,7 @@ import requests
 from bot_logic import gen_pass
 from discord.ext import commands
 
+
 # La variable intents almacena los privilegios del bot
 intents = discord.Intents.default()
 # Activar el privilegio de lectura de mensajes
@@ -26,7 +27,6 @@ async def meme(ctx):
     await ctx.send(file=picture)
 
 
-
 @bot.command()
 async def meme_aleatorio(ctx):
     mem_alet = random.choice(os.listdir("C:/Users/migue/Desktop/Escritorio/python/Bot clase 4 28-08-2024/images"))
@@ -36,6 +36,11 @@ async def meme_aleatorio(ctx):
     await ctx.send(file=picture)
 
 
+@bot.command()
+async def programador_meme(ctx):
+    with open("C:/Users/migue/Desktop/Escritorio/python/Bot clase 4 28-08-2024/images/mem4.jpg", "rb") as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
 
 
 def get_duck_image_url():    
@@ -52,7 +57,16 @@ async def duck(ctx):
     image_url = get_duck_image_url()
     await ctx.send(image_url)
 
+def get_dog_image_url():    
+    url = 'https://random.dog/woof.json'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
 
+@bot.command("dog")
+async def dog(ctx):
+    image_url = get_dog_image_url()
+    await ctx.send(image_url)
 
 
 
@@ -68,9 +82,12 @@ async def bye(ctx):
 async def password(ctx):
     await ctx.send(gen_pass(10))
 
+#AYUDA BOT 
 @bot.command()
 async def bothelp(ctx):
-    await ctx.send(f"Comandos: $hello , $bye , $password (genera una contraseña), $cool , $joined @tu nombre (da la bienvenida)")
+    await ctx.send(f"Comandos: $hello , $bye , $password (genera una contraseña), $cool , $joined @tu nombre (da la bienvenida), $dog (imagenes de perritos), $duck (imagenes de patos), $meme , $meme_aleatorio , $programador_meme")
+
+
 
 @bot.group()
 async def cool(ctx):
